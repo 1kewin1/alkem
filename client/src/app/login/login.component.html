@@ -1,0 +1,69 @@
+<div class="container-fluid" style="text-align: center; background-color: #0083D1; color: #fff">  
+	<div class="row">
+		<div class="col"><h1>Alkem Laboratories Limited Remedy System </h1></div>         
+	</div>  
+</div>
+<div class="alert alert-success" *ngIf="recordUpdated">
+  <strong> Success! You have logged in! </strong>.
+</div>
+<!-- Header Start Ends -->
+<!-- {{remedyList | json}} -->
+<!-- <ul> <li *ngFor="let emp of remedyList"> {{emp.email}}  </li> </ul> -->
+<p> hi this is login page </p>
+<div class="container">	
+
+	<div class="container" style="
+	min-height: 20px;
+	padding: 19px; 
+	margin: 20px;
+	background-color: #F5F5E6;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;"> 
+		<form [formGroup]="remedyForm" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<label for="email">Email address:</label>
+				<input type="email" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': (f.email.dirty && f.email.invalid) || (submitted && f.email.invalid) }">
+				<div *ngIf="(f.email.dirty && f.email.invalid) || (submitted && f.email.invalid)" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                     <div *ngIf="f.email.errors.email">Valid email is required</div>
+                </div>
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" formControlName="password" class="form-control" id="password" [ngClass]="{ 'is-invalid': (f.password.dirty && f.password.invalid) || (submitted && f.password.invalid) }">
+				<div *ngIf="(f.password.dirty && f.password.invalid) || (submitted && f.password.invalid)" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors && f.password.errors.minlength && f.password.errors.minlength.requiredLength">Minimum 6 Characters are required</div> 
+                </div>
+			</div>
+			
+			<div class="form-group form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" type="checkbox"> Remember me
+				</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+	<div class="container"> 
+		<table class="table">
+    <thead>
+      <tr class="table-primary">        
+         <th>ID</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>    
+      <tr class="table-secondary" *ngFor="let emp of remedyList">
+      	<td> {{emp._id}} </td>
+        <td> {{emp.email}}  </td>        
+        <td> {{emp.password}}  </td>   
+        <td (click)="removeRemedy(emp.email)"> Delete </td>  
+      </tr>     
+    </tbody>
+  </table>
+	</div>
+</div>
